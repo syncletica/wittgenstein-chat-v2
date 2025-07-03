@@ -179,7 +179,6 @@ Modify the `TOP_K_*` settings in `config.py` to control how much content is retr
 - `python-dotenv` - Environment variable management
 - `tiktoken` - Token counting
 - `numpy` - Numerical operations
-- `pandas` - Data manipulation
 
 ## Troubleshooting
 
