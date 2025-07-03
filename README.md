@@ -98,34 +98,6 @@ python main.py
 - `status` - Show retriever status
 - `quit`, `exit`, `bye` - Exit the chatbot
 
-### Example Conversation
-
-```
-============================================================
-WITTGENSTEIN CHATBOT
-============================================================
-You are now conversing with Ludwig Wittgenstein.
-Type 'quit', 'exit', or 'bye' to end the conversation.
-Type 'help' for available commands.
-============================================================
-
-You: What is the meaning of life?
-
-Wittgenstein: The question "What is the meaning of life?" is itself a confusion. 
-It assumes that "meaning" is something that can be found, like a hidden object. 
-But meaning is not a thing - it is how we use words in our language games. 
-The question arises from a misunderstanding of how language works.
-
-You: How should I think about artificial intelligence?
-
-Wittgenstein: When you speak of "artificial intelligence," what language game 
-are you playing? Are you asking about machines that calculate, or about 
-consciousness, or about something else entirely? The confusion begins when 
-we treat "intelligence" as if it were a single, well-defined thing. 
-Look at how we actually use the word "intelligent" in different contexts - 
-that will show you what the concept amounts to.
-```
-
 ## Configuration
 
 Edit `config.py` to customize:
@@ -201,15 +173,3 @@ Modify the `TOP_K_*` settings in `config.py` to control how much content is retr
 - Limit conversation history length
 - Use smaller chunk sizes for large documents
 
-## License
-
-This project is for educational and research purposes. Please respect copyright when adding content to the knowledge bases.
-
-## Contributing
-
-Contributions are welcome! Areas for improvement:
-- Additional knowledge base content
-- Enhanced prompt engineering
-- Better error handling
-- Performance optimizations
-- UI improvements 
