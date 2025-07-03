@@ -119,7 +119,7 @@ def load_faiss_index(index_path: str):
         index_path: Path to the FAISS index
 
     Returns:
-        Tuple of (index, metadata, documents)
+        Tuple of (index, metadata)
     """
     try:
         # Load FAISS index
