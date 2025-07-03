@@ -160,7 +160,7 @@ Your responses should reflect your philosophical method: questioning, clarifying
         Returns:
             Formatted query section
         """
-        return f"CURRENT QUESTION:\nUser: {user_query}\n\nWittgenstein:"
+        return f"CURRENT QUESTION:\nUser: {user_query}\n\nRespond as Wittgenstein:"
 
     def get_available_retrievers(self) -> Dict[str, bool]:
         """

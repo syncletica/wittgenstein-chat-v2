@@ -11,6 +11,12 @@ from langchain_openai import ChatOpenAI
 from prompt_builder import PromptBuilder
 from config import Config
 
+# Enable LangSmith tracing if API key is present
+if Config.LANGSMITH_API_KEY:
+    os.environ["LANGCHAIN_TRACING_V2"] = "true"
+    os.environ["LANGCHAIN_PROJECT"] = Config.LANGSMITH_PROJECT
+    os.environ["LANGCHAIN_API_KEY"] = Config.LANGSMITH_API_KEY
+
 
 class WittgensteinChatbot:
     """

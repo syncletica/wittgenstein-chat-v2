@@ -45,6 +45,11 @@ class Config:
     # Chat Configuration
     MAX_HISTORY = 5  # Maximum conversation turns to remember
 
+    # LangSmith Configuration (for visual observability)
+    LANGSMITH_API_KEY = os.getenv("LANGSMITH_API_KEY")
+    LANGSMITH_PROJECT = "wittgenstein-chatbot"
+    LANGSMITH_TRACING_V2 = True
+
     @classmethod
     def validate(cls):
         """Validate that required configuration is present."""
