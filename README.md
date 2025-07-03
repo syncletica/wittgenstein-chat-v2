@@ -116,6 +116,8 @@ python -c "from loaders.ingest import DataIngester; DataIngester().ingest_all()"
 
 ### **external_knowledge/** – arXiv papers
 - [Understanding LLMs: A Comprehensive Overview from Training to Inference](https://arxiv.org/abs/2307.06435)
+- [Philosophical Introduction to Large Language Models](https://arxiv.org/abs/2307.06435)
+- [Comprehensive Overview of Large Language Models](https://arxiv.org/abs/2307.06435)
 
 ### Adding Your Own Data (Optional)
 1. Add texts to the relevant `data/` subdirectories
