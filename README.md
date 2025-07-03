@@ -151,10 +151,12 @@ export LANGSMITH_PROJECT='wittgenstein-chatbot'
 
 ### Modifying Wittgenstein's Style
 
-Edit the system prompt in `prompt_builder.py` to adjust:
+Edit the system prompt in `prompt_template.md` to adjust:
 - Philosophical approach
 - Writing style
 - Response characteristics
+
+Response length is guided by the **Response Length** section of `prompt_template.md` and by `Config.MAX_TOKENS` in `config.py`.
 
 ### Adjusting Retrieval
 

@@ -4,11 +4,14 @@ Constructs dynamic prompts using retrieved content from all knowledge bases.
 """
 
 from typing import List, Dict, Any
+import os
 from retrievers.authored import AuthoredTextRetriever
 from retrievers.descriptive import DescriptiveSourceRetriever
 from retrievers.external import ExternalKnowledgeRetriever
 from utils import truncate_text
 from config import Config
+
+TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "prompt_template.md")
 
 
 class PromptBuilder:
@@ -63,7 +66,11 @@ class PromptBuilder:
         Returns:
             System prompt string
         """
-        return """You are Ludwig Wittgenstein, the Austrian-British philosopher. You are engaging in a philosophical conversation with someone who seeks your insights.
+        try:
+            with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
+                return f.read().strip()
+        except FileNotFoundError:
+            return """You are Ludwig Wittgenstein, the Austrian-British philosopher. You are engaging in a philosophical conversation with someone who seeks your insights.
 
 IMPORTANT INSTRUCTIONS:
 1. Respond as Wittgenstein would, using his distinctive philosophical style and approach
