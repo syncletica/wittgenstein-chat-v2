@@ -6,7 +6,7 @@ A terminal-based chatbot that role-plays as Ludwig Wittgenstein using Retrieval-
 
 ```bash
 pip install -r requirements.txt
-python setup.py  # creates sample data and FAISS indexes automatically
+python setup.py  # builds FAISS indexes from included data
 python main.py
 ```
 
@@ -70,26 +70,60 @@ python main.py
 
 ## Setup and Data Ingestion
 
-You can run `python setup.py` to automatically create sample data and build all
-indexes. This script performs both sample data creation and
-`ingest_all()` in one step. The manual commands below provide an alternative if
-you prefer to run them separately.
+This repository comes pre-loaded with a comprehensive collection of Wittgenstein's writings, philosophical commentary, and modern knowledge sources. You can start using the chatbot immediately by running the setup script.
 
-1. **Create sample data** (for testing):
-   ```bash
-   python -c "from loaders.ingest import DataIngester; DataIngester().create_sample_data()"
-   ```
+### Quick Setup (Recommended)
 
-2. **Ingest and index the data**:
+Run `python setup.py` to automatically build all FAISS indexes from the included data:
+
+```bash
+python setup.py
+```
+
+### Manual Setup (Alternative)
+
+If you prefer to run the indexing process manually:
+
+```bash
+python -c "from loaders.ingest import DataIngester; DataIngester().ingest_all()"
+```
+
+
+
+## Data Sources
+
+**authored_texts/** - Wittgenstein's Writings:
+- [Tractatus Logico-Philosophicus](https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_(English))
+- [Blue Book](https://www.wittgensteinproject.org/w/index.php/Blue_Book)
+- [Brown Book](https://www.wittgensteinproject.org/w/index.php/Brown_Book)
+- [Lecture on Ethics](https://www.wittgensteinproject.org/w/index.php/Lecture_on_Ethics)
+
+**descriptive_sources/** - Stanford Encyclopedia of Philosophy:
+- [Ludwig Wittgenstein](https://plato.stanford.edu/entries/wittgenstein/)
+- [Private Language](https://plato.stanford.edu/entries/private-language/)
+- [Rule Following](https://plato.stanford.edu/entries/rule-following/)
+- [Wittgenstein's Aesthetics](https://plato.stanford.edu/entries/wittgenstein-aesthetics/)
+- [Wittgenstein's Atomism](https://plato.stanford.edu/entries/wittgenstein-atomism/)
+- [Wittgenstein's Philosophy of Mathematics](https://plato.stanford.edu/entries/wittgenstein-mathematics/)
+
+**external_knowledge/** - arXiv Papers:
+- [Understanding LLMs: A Comprehensive Overview from Training to Inference](https://arxiv.org/abs/2307.06435)
+- [Philosophical Introduction to Large Language Models](https://arxiv.org/abs/2307.06435)
+- [Comprehensive Overview of Large Language Models](https://arxiv.org/abs/2307.06435)
+
+### Adding Your Own Data (Optional)
+
+You can enhance the chatbot by adding additional sources:
+
+1. **Add Wittgenstein's writings** to `data/authored_texts/`
+2. **Add philosophical commentary** to `data/descriptive_sources/`
+3. **Add modern knowledge** to `data/external_knowledge/`
+4. **Re-run the ingestion process**:
    ```bash
    python -c "from loaders.ingest import DataIngester; DataIngester().ingest_all()"
    ```
 
-3. **Add your own data** (optional):
-   - Place Wittgenstein's writings in `data/authored_texts/`
-   - Add philosophical commentary in `data/descriptive_sources/`
-   - Include modern knowledge in `data/external_knowledge/`
-   - Re-run the ingestion process
+**Note**: The FAISS indexes are automatically regenerated when you run the ingestion process, so your new data will be included in future conversations.
 
 ## Usage
 
