@@ -172,4 +172,3 @@ Modify the `TOP_K_*` settings in `config.py` to control how much content is retr
 - Reduce `TOP_K_*` values for quicker retrieval
 - Limit conversation history length
 - Use smaller chunk sizes for large documents
-
