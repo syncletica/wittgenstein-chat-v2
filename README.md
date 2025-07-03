@@ -27,12 +27,6 @@ python setup.py  # builds FAISS indexes from included data
 python main.py
 ```
 
-## Example Conversation
-```
-User: How would you describe the "private language" argument?
-Bot: In ordinary language, the idea of a purely private language is incoherent. To understand a word is to master its public use, not to consult an inner diary. Thus, any "private" language would lack the criteria for correctness we rely on in everyday speech.
-```
-
 ## Features
 - **Three-tier RAG System**: Separate FAISS indexes for different knowledge types:
   - `authored_text`: Wittgenstein's own writings
@@ -68,23 +62,27 @@ Bot: In ordinary language, the idea of a purely private language is incoherent. 
 ```
 
 ## Installation
-1. **Clone the repository**
-   ```bash
-git clone https://github.com/syncletica/wittgenstein-chat-v2.git
-cd wittgenstein-chat-v2
-```
-2. **Install dependencies**
-   ```bash
-pip install -r requirements.txt
-```
-3. **Set up environment variables**
-   ```bash
-export OPENAI_API_KEY='your-api-key-here'
-# Optional: enable LangSmith tracing
-export LANGSMITH_API_KEY='your-langsmith-key'
-export LANGSMITH_PROJECT='wittgenstein-chatbot'
-```
-   You can also create a `.env` file with the same variables.
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/syncletica/wittgenstein-chat-v2.git
+    cd wittgenstein-chat-v2
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. **Set up environment variables:**
+    ```bash
+    export OPENAI_API_KEY='your-api-key-here'
+    # Optional: enable LangSmith tracing
+    export LANGSMITH_API_KEY='your-langsmith-key'
+    export LANGSMITH_PROJECT='wittgenstein-chatbot'
+    ```
+    
+    > You can also create a `.env` file with the same variables.
 
 ## Setup and Data Ingestion
 This repository includes sample data so you can start chatting immediately.
@@ -101,13 +99,14 @@ python -c "from loaders.ingest import DataIngester; DataIngester().ingest_all()"
 ```
 
 ## Data Sources
-**authored_texts/** – Wittgenstein's writings
+
+### **authored_texts/** – Wittgenstein's writings
 - [Tractatus Logico-Philosophicus](https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_(English))
 - [Blue Book](https://www.wittgensteinproject.org/w/index.php/Blue_Book)
 - [Brown Book](https://www.wittgensteinproject.org/w/index.php/Brown_Book)
 - [Lecture on Ethics](https://www.wittgensteinproject.org/w/index.php/Lecture_on_Ethics)
 
-**descriptive_sources/** – Stanford Encyclopedia of Philosophy
+### **descriptive_sources/** – Stanford Encyclopedia of Philosophy
 - [Ludwig Wittgenstein](https://plato.stanford.edu/entries/wittgenstein/)
 - [Private Language](https://plato.stanford.edu/entries/private-language/)
 - [Rule Following](https://plato.stanford.edu/entries/rule-following/)
@@ -115,7 +114,7 @@ python -c "from loaders.ingest import DataIngester; DataIngester().ingest_all()"
 - [Wittgenstein's Atomism](https://plato.stanford.edu/entries/wittgenstein-atomism/)
 - [Wittgenstein's Philosophy of Mathematics](https://plato.stanford.edu/entries/wittgenstein-mathematics/)
 
-**external_knowledge/** – arXiv papers
+### **external_knowledge/** – arXiv papers
 - [Understanding LLMs: A Comprehensive Overview from Training to Inference](https://arxiv.org/abs/2307.06435)
 
 ### Adding Your Own Data (Optional)
@@ -143,7 +142,16 @@ Edit `config.py` to adjust settings:
 - **Retrieval Settings** – number of results from each knowledge base
 - **Embedding Settings** – chunk size, overlap, embedding model
 - **Chat Settings** – conversation history length
-- **LangSmith Tracing** – controlled by `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT`
+
+### LangSmith Tracing (Optional)
+Set `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` to enable LangSmith tracing.
+This provides observability through the LangSmith dashboard and is not required
+for normal operation.
+
+```bash
+export LANGSMITH_API_KEY='your-langsmith-key'
+export LANGSMITH_PROJECT='wittgenstein-chatbot'
+```
 
 ## How It Works
 1. **Query Processing** – your question is processed and searches all knowledge bases
@@ -183,9 +191,3 @@ Edit `config.py` to adjust settings:
 - Reduce `TOP_K_*` values for quicker retrieval
 - Limit conversation history length
 - Use smaller chunk sizes for large documents
-
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
-
-## License
-This project is licensed under the [MIT License](LICENSE).
