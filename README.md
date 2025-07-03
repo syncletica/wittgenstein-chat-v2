@@ -42,7 +42,7 @@ A terminal-based chatbot that role-plays as Ludwig Wittgenstein using Retrieval-
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/syncletica/wittgenstein-chat-v2.git
    cd wittgenstein-chat-v2
    ```
 
