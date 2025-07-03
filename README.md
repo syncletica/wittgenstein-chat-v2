@@ -62,6 +62,11 @@ A terminal-based chatbot that role-plays as Ludwig Wittgenstein using Retrieval-
 
 ## Setup and Data Ingestion
 
+You can run `python setup.py` to automatically create sample data and build all
+indexes. This script performs both sample data creation and
+`ingest_all()` in one step. The manual commands below provide an alternative if
+you prefer to run them separately.
+
 1. **Create sample data** (for testing):
    ```bash
    python -c "from loaders.ingest import DataIngester; DataIngester().create_sample_data()"
