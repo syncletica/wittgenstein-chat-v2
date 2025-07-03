@@ -107,6 +107,17 @@ Edit `config.py` to customize:
 - **Embedding Settings**: Chunk size, overlap, embedding model
 - **Chat Settings**: Conversation history length
 
+### LangSmith Tracing (optional)
+
+Set `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` to enable LangSmith tracing.
+This provides observability through the LangSmith dashboard and is not required
+for normal operation.
+
+```bash
+export LANGSMITH_API_KEY='your-langsmith-key'
+export LANGSMITH_PROJECT='wittgenstein-chatbot'
+```
+
 ## How It Works
 
 1. **Query Processing**: When you ask a question, the system searches all three knowledge bases
