@@ -2,6 +2,14 @@
 
 A terminal-based chatbot that role-plays as Ludwig Wittgenstein using Retrieval-Augmented Generation (RAG). The chatbot combines Wittgenstein's own writings, philosophical commentary, and external knowledge to provide contextually relevant responses in his distinctive style.
 
+## Quick Start
+
+```bash
+pip install -r requirements.txt
+python setup.py  # creates sample data and FAISS indexes automatically
+python main.py
+```
+
 ## Features
 
 - **Three-tier RAG System**: Uses separate FAISS indexes for different types of knowledge:
