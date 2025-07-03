@@ -4,7 +4,7 @@ Utility functions for the Wittgenstein chatbot.
 
 import os
 import json
-from typing import List, Dict, Any
+from typing import List, Dict
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain.schema import Document
