@@ -178,39 +178,6 @@ def search_faiss_index(
     return results
 
 
-def format_retrieved_content(
-    authored_results: List, descriptive_results: List, external_results: List
-) -> str:
-    """
-    Format retrieved content for inclusion in the prompt.
-
-    Args:
-        authored_results: Results from authored text search
-        descriptive_results: Results from descriptive sources search
-        external_results: Results from external knowledge search
-
-    Returns:
-        Formatted string for prompt inclusion
-    """
-    formatted = ""
-
-    if authored_results:
-        formatted += "=== WITTGENSTEIN'S WRITINGS (for style reference) ===\n"
-        for i, (score, metadata) in enumerate(authored_results, 1):
-            formatted += f"{i}. {metadata.get('content', 'No content')}\n\n"
-
-    if descriptive_results:
-        formatted += "=== PHILOSOPHICAL CONTEXT ===\n"
-        for i, (score, metadata) in enumerate(descriptive_results, 1):
-            formatted += f"{i}. {metadata.get('content', 'No content')}\n\n"
-
-    if external_results:
-        formatted += "=== EXTERNAL KNOWLEDGE (for factual context) ===\n"
-        for i, (score, metadata) in enumerate(external_results, 1):
-            formatted += f"{i}. {metadata.get('content', 'No content')}\n\n"
-
-    return formatted
-
 
 def truncate_text(text: str, max_tokens: int = 1000) -> str:
     """
