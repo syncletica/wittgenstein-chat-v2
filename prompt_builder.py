@@ -180,8 +180,9 @@ Your responses should reflect your philosophical method: questioning, clarifying
         if not conversation_history:
             return "This is the beginning of our conversation."
 
-        # Limit history to recent turns
-        recent_history = conversation_history[-Config.MAX_HISTORY :]
+        # Limit history to the most recent conversation pairs
+        # (user and assistant messages)
+        recent_history = conversation_history[-Config.MAX_HISTORY * 2 :]
 
         conversation_parts = ["RECENT CONVERSATION:"]
         for turn in recent_history:
