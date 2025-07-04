@@ -45,6 +45,11 @@ class PromptBuilder:
         descriptive_results = self.descriptive_retriever.retrieve(user_query)
         external_results = self.external_retriever.retrieve(user_query)
 
+        # Debug: Show what was retrieved
+        print(
+            f"Retrieved: {len(authored_results)} authored, {len(descriptive_results)} descriptive, {len(external_results)} external results"
+        )
+
         # Build the prompt components
         system_prompt = self._build_system_prompt()
         context_section = self._build_context_section(
@@ -88,6 +93,7 @@ Your responses should reflect your philosophical method: questioning, clarifying
     ) -> str:
         """
         Build the context section using retrieved content.
+        Ensures all three knowledge sources are included with balanced allocation.
 
         Args:
             authored_results: Results from Wittgenstein's writings
@@ -97,6 +103,21 @@ Your responses should reflect your philosophical method: questioning, clarifying
         Returns:
             Formatted context section
         """
+        # Calculate token budget for context (reserve space for system prompt, conversation, and query)
+        total_tokens = Config.MAX_TOKENS
+        reserved_tokens = (
+            2000  # Reserve for system prompt, conversation history, and query
+        )
+        context_tokens = total_tokens - reserved_tokens
+
+        # Allocate tokens equally among the three knowledge sources
+        tokens_per_source = context_tokens // 3
+        chars_per_source = tokens_per_source * 4  # Rough approximation
+
+        print(
+            f"Token allocation: {tokens_per_source} tokens per source ({chars_per_source} chars)"
+        )
+
         context_parts = []
 
         # Add authored text context (for style and approach)
@@ -104,14 +125,26 @@ Your responses should reflect your philosophical method: questioning, clarifying
             context_parts.append("RELEVANT PASSAGES FROM YOUR WRITINGS:")
             for i, (score, metadata) in enumerate(authored_results, 1):
                 content = metadata.get("content", "")
+                # Limit content to allocated space
+                if len(content) > chars_per_source:
+                    content = content[:chars_per_source] + "..."
                 context_parts.append(f"{i}. {content}")
+        else:
+            context_parts.append("RELEVANT PASSAGES FROM YOUR WRITINGS:")
+            context_parts.append("No relevant passages found.")
 
         # Add descriptive context (philosophical background)
         if descriptive_results:
             context_parts.append("\nPHILOSOPHICAL CONTEXT:")
             for i, (score, metadata) in enumerate(descriptive_results, 1):
                 content = metadata.get("content", "")
+                # Limit content to allocated space
+                if len(content) > chars_per_source:
+                    content = content[:chars_per_source] + "..."
                 context_parts.append(f"{i}. {content}")
+        else:
+            context_parts.append("\nPHILOSOPHICAL CONTEXT:")
+            context_parts.append("No philosophical context found.")
 
         # Add external knowledge context (for factual background)
         if external_results:
@@ -120,13 +153,17 @@ Your responses should reflect your philosophical method: questioning, clarifying
             )
             for i, (score, metadata) in enumerate(external_results, 1):
                 content = metadata.get("content", "")
+                # Limit content to allocated space
+                if len(content) > chars_per_source:
+                    content = content[:chars_per_source] + "..."
                 context_parts.append(f"{i}. {content}")
+        else:
+            context_parts.append(
+                "\nEXTERNAL KNOWLEDGE (for context only - do not quote directly):"
+            )
+            context_parts.append("No external knowledge found.")
 
-        return (
-            "\n".join(context_parts)
-            if context_parts
-            else "No specific context available."
-        )
+        return "\n".join(context_parts)
 
     def _build_conversation_section(
         self, conversation_history: List[Dict] = None
@@ -151,9 +188,9 @@ Your responses should reflect your philosophical method: questioning, clarifying
             role = turn.get("role", "unknown")
             content = turn.get("content", "")
             if role == "user":
-                conversation_parts.append(f"User: {content}")
+                conversation_parts.append(f"User asks: {content}")
             elif role == "assistant":
-                conversation_parts.append(f"Wittgenstein: {content}")
+                conversation_parts.append(f"Wittgenstein responds: {content}")
 
         return "\n".join(conversation_parts)
 
@@ -167,7 +204,7 @@ Your responses should reflect your philosophical method: questioning, clarifying
         Returns:
             Formatted query section
         """
-        return f"CURRENT QUESTION:\nUser: {user_query}\n\nRespond as Wittgenstein:"
+        return f"User asks: {user_query}\n\nYou respond as Wittgenstein:"
 
     def get_available_retrievers(self) -> Dict[str, bool]:
         """

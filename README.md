@@ -85,15 +85,16 @@ python main.py
     > You can also create a `.env` file with the same variables.
 
 ## Setup and Data Ingestion
-This repository includes sample data so you can start chatting immediately.
+This repository comes pre-loaded with a comprehensive collection of Wittgenstein's writings, philosophical commentary, and modern knowledge sources. You can start using the chatbot immediately by running the setup script.
 
 ### Quick Setup (Recommended)
-Run `python setup.py` to build FAISS indexes:
+Run `python setup.py` to automatically build FAISS indexes from the included data:
 ```bash
 python setup.py
 ```
 
 ### Manual Setup (Alternative)
+If you prefer to run the indexing process manually:
 ```bash
 python -c "from loaders.ingest import DataIngester; DataIngester().ingest_all()"
 ```

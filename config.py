@@ -39,11 +39,11 @@ class Config:
     CHUNK_OVERLAP = 200  # Overlap between chunks
 
     # Prompt Configuration
-    MAX_TOKENS = 2000  # Maximum tokens for OpenAI response
+    MAX_TOKENS = 6000  # Maximum tokens for OpenAI response (increased to accommodate all knowledge sources)
     TEMPERATURE = 0.7  # Creativity level (0.0 = deterministic, 1.0 = very creative)
 
     # Chat Configuration
-    MAX_HISTORY = 5  # Maximum conversation turns to remember
+    MAX_HISTORY = 3  # Maximum conversation turns to remember (reduced to save space for knowledge sources)
 
     # LangSmith Configuration (for visual observability)
     LANGSMITH_API_KEY = os.getenv("LANGSMITH_API_KEY")

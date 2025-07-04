@@ -30,12 +30,7 @@ def main():
         # Create data ingester
         ingester = DataIngester()
 
-        # Create sample data
-        print("\n📝 Creating sample data...")
-        ingester.create_sample_data()
-        print("✅ Sample data created successfully")
-
-        # Ingest all data
+        # Ingest all data (using existing data files)
         print("\n🔍 Ingesting and indexing data...")
         ingester.ingest_all()
         print("✅ Data ingestion complete")
