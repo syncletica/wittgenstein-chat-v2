@@ -4,11 +4,7 @@ Used to provide factual context for modern concepts and topics.
 """
 
 from typing import List, Tuple, Dict, Any
-import sys
 import os
-
-# Add parent directory to path for imports
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils import load_faiss_index, search_faiss_index
 from config import Config
