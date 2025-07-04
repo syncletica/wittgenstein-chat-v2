@@ -1,0 +1,5 @@
+Imagine that you were in pain and were simultaneously hearing a piano being tuned in the next room. You say "It'll stop soon". It surely makes quite a difference whether you mean the pain or the piano-tuning! Of course; but what does this difference consist in? I admit, in many cases some direction of attention will correspond to your meaning on thing or another, just as a look often does, or a gesture, or a way of shutting one's eyes which might be called "looking into oneself".
+
+If a meaning of a word has occured to someone and he has not forgotten it, he can now use the word in such-and-such a way. A person to whom the meaning has occured now knows it, and its occuring to him was the beginning of him knowing it. Then how is this like an experience of imagining somethings?
+
+That what someone else says to himself is hidden from me is part of the concept of inner speech. Only "hidden" is the wrong word here; for if it is hidden from me, it ought to be apparent to him, he would have to know it. But he does not 'know' it; only, he doubt which exists for me does not exist for him.
