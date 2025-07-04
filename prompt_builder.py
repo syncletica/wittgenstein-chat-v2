@@ -5,6 +5,7 @@ Constructs dynamic prompts using retrieved content from all knowledge bases.
 
 from typing import List, Dict, Any
 import os
+import logging
 from retrievers.authored import AuthoredTextRetriever
 from retrievers.descriptive import DescriptiveSourceRetriever
 from retrievers.external import ExternalKnowledgeRetriever
@@ -12,6 +13,14 @@ from utils import truncate_text
 from config import Config
 
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "prompt_template.md")
+
+# Configure module-level logger
+logger = logging.getLogger(__name__)
+if not logger.handlers:
+    _handler = logging.StreamHandler()
+    _handler.setFormatter(logging.Formatter("%(message)s"))
+    logger.addHandler(_handler)
+logger.setLevel(logging.DEBUG if os.getenv("DEBUG") else logging.INFO)
 
 
 class PromptBuilder:
@@ -46,8 +55,11 @@ class PromptBuilder:
         external_results = self.external_retriever.retrieve(user_query)
 
         # Debug: Show what was retrieved
-        print(
-            f"Retrieved: {len(authored_results)} authored, {len(descriptive_results)} descriptive, {len(external_results)} external results"
+        logger.debug(
+            "Retrieved: %d authored, %d descriptive, %d external results",
+            len(authored_results),
+            len(descriptive_results),
+            len(external_results),
         )
 
         # Build the prompt components
@@ -114,8 +126,10 @@ Your responses should reflect your philosophical method: questioning, clarifying
         tokens_per_source = context_tokens // 3
         chars_per_source = tokens_per_source * 4  # Rough approximation
 
-        print(
-            f"Token allocation: {tokens_per_source} tokens per source ({chars_per_source} chars)"
+        logger.debug(
+            "Token allocation: %d tokens per source (%d chars)",
+            tokens_per_source,
+            chars_per_source,
         )
 
         context_parts = []
