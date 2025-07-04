@@ -5,7 +5,6 @@ A terminal-based chatbot that role-plays as Ludwig Wittgenstein using RAG.
 """
 
 import os
-import sys
 from typing import List, Dict
 from langchain_openai import ChatOpenAI
 from prompt_builder import PromptBuilder

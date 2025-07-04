@@ -4,12 +4,7 @@ Handles loading, processing, and indexing of text data.
 """
 
 import os
-import json
 from typing import List, Dict, Any
-import sys
-
-# Add parent directory to path for imports
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils import load_text_files, split_texts, create_faiss_index
 from config import Config
