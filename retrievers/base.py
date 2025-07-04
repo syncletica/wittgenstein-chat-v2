@@ -4,6 +4,7 @@ from typing import List, Tuple, Dict, Any
 
 from config import Config
 from utils import load_faiss_index, search_faiss_index
+from langchain_openai import OpenAIEmbeddings
 
 
 class BaseRetriever:
@@ -14,6 +15,8 @@ class BaseRetriever:
         self.default_top_k = default_top_k
         self.index = None
         self.metadata = None
+        # Initialize embeddings once per retriever
+        self.embeddings = OpenAIEmbeddings(model=Config.EMBEDDING_MODEL)
         self.load_index()
 
     def load_index(self) -> None:
@@ -34,6 +37,7 @@ class BaseRetriever:
             metadata=self.metadata,
             top_k=top_k,
             embedding_model=Config.EMBEDDING_MODEL,
+            embeddings=self.embeddings,
         )
 
     def is_available(self) -> bool:

@@ -4,7 +4,7 @@ Utility functions for the Wittgenstein chatbot.
 
 import os
 import json
-from typing import List, Dict
+from typing import List, Dict, Optional
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain.schema import Document
@@ -141,6 +141,7 @@ def search_faiss_index(
     metadata: List[Dict],
     top_k: int,
     embedding_model: str = "text-embedding-ada-002",
+    embeddings: Optional[OpenAIEmbeddings] = None,
 ):
     """
     Search a FAISS index for similar documents.
@@ -150,7 +151,8 @@ def search_faiss_index(
         index: FAISS index
         metadata: Document metadata
         top_k: Number of results to return
-        embedding_model: OpenAI embedding model to use
+        embedding_model: OpenAI embedding model to use when `embeddings` is None
+        embeddings: Optional pre-initialized OpenAIEmbeddings instance
 
     Returns:
         List of (score, document_content) tuples
@@ -159,7 +161,8 @@ def search_faiss_index(
         return []
 
     # Get query embedding
-    embeddings = OpenAIEmbeddings(model=embedding_model)
+    if embeddings is None:
+        embeddings = OpenAIEmbeddings(model=embedding_model)
     query_embedding = embeddings.embed_query(query)
     query_vector = np.array([query_embedding]).astype("float32")
 
